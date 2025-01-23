@@ -3,30 +3,28 @@ function getComputerChoice() {
     let computerChoice = Math.random();
     console.log("The computer has made it's decision.")
     if (computerChoice < 0.33) {
-        return "Paper"
+        return "paper"
     } 
     else if (computerChoice < 0.66) {
-        return "Rock"
+        return "rock"
     }   
     else {
-        return "Scissors"
+        return "scissors"
     }
 }
-
-getComputerChoice();
 
 function getHumanChoice () {
-    let humanChoice = prompt("What will it be?").toLowerCase()
-    if (humanChoice === "rock" || humanChoice === "paper" || humanChoice === "scissors") {
-        console.log("You have made your decision.")
-        return HumanChoice
-    }
-    else {
-        console.log("Invalid input - try again.")
+    while (true) {
+        let humanChoice = prompt("What will it be?").toLowerCase()
+        if (humanChoice === "rock" || humanChoice === "paper" || humanChoice === "scissors") {
+            console.log("You have made your decision.")
+            return humanChoice
+        } else {
+            console.log("Invalid input - try again.")
+        }
     }
 }
 
-getHumanChoice();
 
 // Set initial score
 let computerScore = 0
@@ -37,7 +35,7 @@ function playRound (computerChoice, humanChoice) {
         console.log("It's a tie!")
     }
 
-    else if (computerChoice === "scissors" && humanChoice === "rock" || computerChoice === "rock" && humanChoice === "paper" || computerChoice === "scissors" && humanChoice === "paper") {
+    else if (computerChoice === "scissors" && humanChoice === "rock" || computerChoice === "rock" && humanChoice === "paper" || computerChoice === "paper" && humanChoice === "scissors") {
         console.log("You win! Nice.")
         humanScore++
     }
@@ -48,4 +46,7 @@ function playRound (computerChoice, humanChoice) {
     }
 }
 
-playRound(computerChoice, humanChoice);
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);
