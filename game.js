@@ -26,27 +26,34 @@ function getHumanChoice () {
 }
 
 
-// Set initial score
-let computerScore = 0
-let humanScore = 0
+function playGame() {
 
-function playRound (computerChoice, humanChoice) {
-    if (computerChoice === humanChoice) {
-        console.log("It's a tie!")
+    let computerScore = 0
+    let humanScore = 0
+
+    function playRound (computerChoice, humanChoice) {
+        if (computerChoice === humanChoice) {
+            console.log("It's a tie!")
+        }
+    
+        else if (computerChoice === "scissors" && humanChoice === "rock" || computerChoice === "rock" && humanChoice === "paper" || computerChoice === "paper" && humanChoice === "scissors") {
+            console.log("You win! Nice.")
+            humanScore++
+        }
+    
+        else {
+            console.log("The computer wins! Unlucky.")
+            computerScore++
+        }
     }
 
-    else if (computerChoice === "scissors" && humanChoice === "rock" || computerChoice === "rock" && humanChoice === "paper" || computerChoice === "paper" && humanChoice === "scissors") {
-        console.log("You win! Nice.")
-        humanScore++
+    // Play 5 rounds
+    for (let i = 0; i < 5; i++) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+        playRound(computerSelection, humanSelection);
     }
 
-    else {
-        console.log("The computer wins! Unlucky.")
-        computerScore++
-    }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
+playGame();
