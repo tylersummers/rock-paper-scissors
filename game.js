@@ -13,24 +13,17 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice () {
-
-    while (true) {
-        let humanChoice = prompt("Welcome to Paper Scissors Rock. What will it be?").toLowerCase()
-
-        if (humanChoice === "rock" || humanChoice === "paper" || humanChoice === "scissors") {
-            console.log("You have made your decision.")
-            return humanChoice
-
-        } else {
-            console.log("Invalid input - try again.")
-        }
-    }
+function getHumanChoice() {
+    return new Promise((resolve) => {
+        document.querySelector("#rock-btn").onclick = () => resolve("rock");
+        document.querySelector("#paper-btn").onclick = () => resolve("paper");
+        document.querySelector("#scissors-btn").onclick = () => resolve("scissors");
+    });
 }
 
-// Play five rounds
+// Play Game
 
-function playGame() {
+async function playGame() {
 
     let computerScore = 0
     let humanScore = 0
@@ -52,14 +45,14 @@ function playGame() {
         }
     }
 
+
     for (let i = 0; i < 5; i++) {
-        const humanSelection = getHumanChoice();
+        const humanSelection = await getHumanChoice();
         const computerSelection = getComputerChoice();
         playRound(computerSelection, humanSelection);
     }
 
-    if (i = 5) {
-        console.log("Game over! Computer score: " + computerScore + " Your score: " + humanScore)
+    console.log("Game over! Computer score: " + computerScore + " Your score: " + humanScore)
 
         if (computerScore === humanScore) {
             console.log("The game is a tie!")
@@ -72,6 +65,5 @@ function playGame() {
         else
         console.log("You win the game!")
     }
-}
 
 playGame();
